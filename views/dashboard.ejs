@@ -1,0 +1,79 @@
+<%- include('partials/head') %>
+<%- include('partials/nav') %>
+<div class="container bg-white">
+    <div class="row">
+        <div class="col-md-3 py-5">
+                <h5>Name: <%= `${user.fname} ${user.lname}` %></h5>
+            <% if(signedUser.role == 'employee') {%>
+                <h5>Role: employee</h5>
+                <p>Dashboard</p>
+                <hr>
+                <ul>
+                    <a href='/dashboard'><li>Your Tickets</li></a>
+                    <a href="/order"><li>New Ticket</li></a>
+                </ul>
+            <%  } %> 
+            
+            <% if(signedUser.role == 'IT') {%>
+                <h5>Role: IT</h5>
+                <p>Dashboard</p>
+                <hr>
+                <ul>
+                    <a href="/dashboard?status=Approved"><li>Approved Tickets</li></a>
+                    <a href="/dashboard?completed=Delivered"><li>Completed Tickets</li></a>
+                </ul>
+            <%  } %> 
+            
+            <% if(signedUser.role == 'supervisor') {%>
+                <h5>Role: supervisor</h5>
+                <p>Dashboard</p>
+                <hr>
+                <ul>
+                    <a href='/dashboard?status=Pending'><li>Pending Tickets</li></a>
+                    <a href='/dashboard?status=Approved'><li>Approved Tickets</li></a>
+                </ul>
+            <%  } %> 
+        </div>
+        <div class="col-md-6 py-5 bg-white">
+            <h3>Your Ticket Status</h3>
+            <table class="table table-hover table-dark text-center">
+                <thead>
+                  <tr>
+                    <th scope="col">Ticket ID</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Submitted Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Complete</th>
+                    <% if(signedUser.role == 'supervisor' && status != "Approved"){ %>
+                      <th scope="col">Approve</th>
+                        <% } %>  
+                  </tr>
+                </thead>
+                <tbody>
+                  <% tickets.forEach(ticket=>{ %>
+                    <tr>
+                        <th scope="row"><%= ticket._id %></th>
+                        <td><%= ticket.user.fname  %></td>
+                        <td><%= ticket.user.lname  %></td>
+                        <td><%= ticket.user.department  %></td>
+                        <td><%= ticket.submitted.toDateString() %> </td>
+                        <td><%= ticket.status %> </td>
+                        <% if(signedUser.role == 'IT'){ %>
+                          <td><a href="/tickets/<%= ticket._id %>?completed=delivered" class="btn btn-success">Delivered</a></td>
+                        <% } else { %> 
+                        <td><%= ticket.completed %> </td>
+                        <% } %>
+                        <% if(signedUser.role == 'supervisor' && status != "Approved"){ %>
+                        <td><a href="/tickets/<%= ticket._id %>" class="btn btn-success">Approve</a></td>
+                          <% } %>  
+                    </tr>
+                  <% }) %> 
+                </tbody>
+              </table>
+        </div>
+    </div> <!--row-->
+</div>
+
+<%- include('partials/footer') %>

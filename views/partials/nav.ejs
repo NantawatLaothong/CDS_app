@@ -1,0 +1,21 @@
+<div class="wrapper row1">
+    <header id="header" class="clear">
+      <div id="hgroup">
+        <a href="/"><h1>UMASS Boston</h1></a>
+        <h2>Computer Building Department</h2>
+      </div>
+      <nav>
+        <ul>
+          <% if(!signedUser) { %> 
+          <li><a href="/login">Login</a></li>
+          <li><a href="/users/register">Register</a></li>
+         <% } else { %>
+          <li>Welcome <%= signedUser.fname %></li>
+          <li><a href="/order">Order</a></li>
+          <li><a href="/dashboard">Dashboard</a></li>
+          <li><a href="/logout">Log out</a></li>
+        <% } %>    
+      </ul>
+      </nav>
+    </header>
+  </div>
