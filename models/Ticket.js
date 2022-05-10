@@ -27,7 +27,7 @@ const ticketScheme = new Schema({
     },
     completed: {
         type: String,
-        enum: ['In-Progress', 'Dilivered'],
+        enum: ['In-Progress', 'Dilivered', 'Denied'],
         default: 'In-Progress'
     },
     address: {

@@ -8,9 +8,10 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
+    
     <div class="container-fluid login-page">
-
         <div class="row">
+          <%- include('partials/flash')  %> 
             <div class="col-md-6 offset-md-3 login-form mt-5">
                 <form action="/login" method="POST">
                   <h1>Login to use the service</h1>

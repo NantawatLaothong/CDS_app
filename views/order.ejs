@@ -43,10 +43,15 @@
                   <input type="tel" name="phone" class="form-control">
                 </div>
               </div>
-              <div class="form-group col-6 mt-3">
-                  <p>CPU: <span class="specCPU"></span></p>
-                  <p>RAM: <span class="specRam"></span></p>
-                  <p>Estimated Cost: <span class="specCost"></span></p>
+              <div class="form-group col-12 mt-3">
+                  <p><b>CPU</b>: <span class="specCPU"></span></p>
+                  <p><b>GPU</b>: <span class="specGPU"></span></p>
+                  <p><b>Memory</b>: <span class="specRam"></span></p>
+                  <p><b>Storage</b>: <span class="specstorage"></span></p>
+                  <p><b>Case</b>: <span class="specCase"></span></p>
+                  <p><b>Power Supply</b>: <span class="specPowerSupply"></span></p>
+                  <p><b>Operating System</b>: <span class="specOs"></span></p>
+                  <p><b>Estimated Cost</b>: <span class="specCost"></span></p>
               </div>
               <div class="form-group">
                   <label for="exampleFormControlTextarea1">Notes for the build</label>
@@ -63,25 +68,113 @@
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
   crossorigin="anonymous"></script>
   <script>
-      $('.specCPU').html('intel 7700k')
-      $('.specRam').html('16GB')
-      $('.specCost').html('~$3000');
+    
+    const spec1 = {
+            cpu: "Intel Core i5-10400 2.9 GHz 6-Core Processor",
+            motherboard: "Asus PRIME B560M-A Micro ATX LGA1200 Motherboard",
+            memory: "Team T-FORCE VULCAN Z 16 GB (2 x 8 GB) DDR4-3000 CL16 Memory",
+            storage: "Team GX2 512 GB 2.5\" Solid State Drive",
+            case: "Thermaltake Versa H17 MicroATX Mini Tower Case",
+            powerSupply: "EVGA BR 450 W 80+ Bronze Certified ATX Power Supply",
+            os: "Microsoft Windows 10 Home OEM 64-bit",
+            cost: "≈561",
+            link: "https://pcpartpicker.com/list/LVnt8r"
+        }
+
+const spec2 = {
+    cpu: "AMD Ryzen 9 3900X 3.8 GHz 12-Core Processor",
+    motherboard: "Asus ROG STRIX B550-F GAMING (WI-FI) ATX AM4 Motherboard",
+    memory: "G.Skill Trident Z RGB 32 GB (4 x 8 GB) DDR4-3000 CL16 Memory",
+    storage: "Seagate FireCuda 1 TB 3.5\" 7200RPM Hybrid Internal Hard Drive and ADATA SU800 512 GB 2.5\" Solid State Drive",
+    case: "NZXT H440 ATX Mid Tower Case",
+    gpu: "EVGA GeForce GTX 1070 8 GB ACX 3.0 Video Card",
+    powerSupply: "Corsair CV 650 W 80+ Bronze Certified ATX Power Supply",
+    os: "Microsoft Windows 11 Pro OEM 64-bit",
+    cost: "≈1707",
+    link: "https://pcpartpicker.com/list/yprLJM"
+}
+
+const spec3 = {
+    cpu: "Intel Core i9-10900K 3.7 GHz 10-Core Processor",
+    cooler: "Scythe FUMA 2 51.17 CFM CPU Cooler",
+    motherboard: "Asus ROG STRIX Z490-I GAMING Mini ITX LGA1200 Motherboard",
+    memory: "Corsair Vengeance RGB Pro 16 GB (2 x 8 GB) DDR4-3200 CL16 Memory",
+    storage: "Western Digital Blue Mobile 2 TB 2.5\" 5400RPM Internal Hard Drive and Samsung 970 Evo Plus 1 TB M.2-2280 NVME Solid State Drive",
+    case: "Cooler Master MasterBox NR200 Mini ITX Desktop Case",
+    gpu: "Asus GeForce GTX 980 Ti 6 GB STRIX Video Card",
+    powerSupply: "EVGA SuperNOVA GM 650 W 80+ Gold Certified Fully Modular SFX Power Supply",
+    os: "Microsoft Windows 11 Pro OEM 64-bit",
+    cost: "≈2050",
+    link: "https://pcpartpicker.com/list/WNfzt8"
+}
+
+const spec4 = {
+    cpu: "Intel Core i7-10700K 3.8 GHz 8-Core Processor",
+    cooler: "Noctua NH-D15S chromax.black 82.51 CFM CPU Cooler",
+    motherboard: "ASRock Z590M Pro4 Micro ATX LGA1200 Motherboard",
+    memory: "Corsair Vengeance LPX 64 GB (2 x 32 GB) DDR4-3200 CL16 Memory",
+    storage: "Samsung 970 Evo Plus 500 GB M.2-2280 NVME Solid State Drive",
+    case: "Cooler Master N200 MicroATX Mini Tower Case",
+    gpu: "PNY Quadro RTX 4000 8 GB Video Card",
+    powerSupply: "SeaSonic FOCUS Plus Gold 650 W 80+ Gold Certified Fully Modular ATX Power Supply",
+    os: "Microsoft Windows 10 Pro OEM 64-bit",
+    cost: "≈2200",
+    link: "hhttps://pcpartpicker.com/list/QzzrdD"
+}
+            $('.specCPU').html(spec1.cpu)
+            $('.specRam').html(spec1.memory)
+            $('.specGPU').html(spec1.gpu)
+            $('.specstorage').html(spec1.storage)
+            $('.specCase').html(spec1.case)
+            $('.specPowerSupply').html(spec1.powerSupply)
+            $('.specOs').html(spec1.os)
+            $('.specCost').html(`$${spec1.cost}`);
+// const specs = [spec1, spec2, spec3, spec4]
       $('#spec').on('change', ()=>{
         var spec = $('#spec').val();
         console.log(spec);
         switch (spec) {
           case 'spec1': 
-            $('.specCPU').html('intel 7700k')
-            $('.specRam').html('16GB')
-            $('.specCost').html('~$3000');
+            $('.specCPU').html(spec1.cpu)
+            $('.specRam').html(spec1.memory)
+            $('.specGPU').html(spec1.gpu)
+            $('.specstorage').html(spec1.storage)
+            $('.specCase').html(spec1.case)
+            $('.specPowerSupply').html(spec1.powerSupply)
+            $('.specOs').html(spec1.os)
+            $('.specCost').html(`$${spec1.cost}`);
             break
           case 'spec2':
-            $('.specCPU').html('AMD 5900');
-            $('.specRam').html('8GB')
-            $('.specCost').html('~$599');
+          $('.specCPU').html(spec2.cpu)
+            $('.specRam').html(spec2.memory)
+            $('.specGPU').html(spec2.gpu)
+            $('.specstorage').html(spec2.storage)
+            $('.specCase').html(spec2.case)
+            $('.specPowerSupply').html(spec2.powerSupply)
+            $('.specOs').html(spec2.os)
+            $('.specCost').html(`$${spec2.cost}`);
+            break
+          case 'spec3':
+          $('.specCPU').html(spec3.cpu)
+            $('.specRam').html(spec3.memory)
+            $('.specGPU').html(spec3.gpu)
+            $('.specstorage').html(spec3.storage)
+            $('.specCase').html(spec3.case)
+            $('.specPowerSupply').html(spec3.powerSupply)
+            $('.specOs').html(spec3.os)
+            $('.specCost').html(`$${spec3.cost}`);
+            break  
+          case 'spec4':
+          $('.specCPU').html(spec4.cpu)
+            $('.specRam').html(spec4.memory)
+            $('.specGPU').html(spec4.gpu)
+            $('.specstorage').html(spec4.storage)
+            $('.specCase').html(spec4.case)
+            $('.specPowerSupply').html(spec4.powerSupply)
+            $('.specOs').html(spec4.os)
+            $('.specCost').html(`$${spec4.cost}`);
             break
           default:
-
         }
       })
 

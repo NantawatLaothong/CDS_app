@@ -1,6 +1,7 @@
 <%- include('partials/head') %>
 <%- include('partials/nav') %>
 <div class="container bg-white">
+  <%- include('partials/flash')  %> 
     <div class="row">
         <div class="col-md-3 py-5">
                 <h5>Name: <%= `${user.fname} ${user.lname}` %></h5>
@@ -31,6 +32,7 @@
                 <ul>
                     <a href='/dashboard?status=Pending'><li>Pending Tickets</li></a>
                     <a href='/dashboard?status=Approved'><li>Approved Tickets</li></a>
+                    <a href='/dashboard?status=Denied'><li>Denied Tickets</li></a>
                 </ul>
             <%  } %> 
         </div>
@@ -44,29 +46,40 @@
                     <th scope="col">Last</th>
                     <th scope="col">Department</th>
                     <th scope="col">Submitted Date</th>
+                    <% if(signedUser.role == 'IT'){ %>
+                      <th scope="col">Spec</th>
+                        <% } %>  
                     <th scope="col">Status</th>
                     <th scope="col">Complete</th>
-                    <% if(signedUser.role == 'supervisor' && status != "Approved"){ %>
-                      <th scope="col">Approve</th>
+                    <% if(signedUser.role == 'supervisor' && status != "Approved" && status != "Denied"){ %>
+                      <th colspan="2" scope="col">Approve</th>
                         <% } %>  
                   </tr>
                 </thead>
                 <tbody>
                   <% tickets.forEach(ticket=>{ %>
                     <tr>
-                        <th scope="row"><%= ticket._id %></th>
+                        <th scope="row">...<%= ticket._id.toString().substring(ticket._id.toString().length - 8  ) %></th>
                         <td><%= ticket.user.fname  %></td>
                         <td><%= ticket.user.lname  %></td>
                         <td><%= ticket.user.department  %></td>
                         <td><%= ticket.submitted.toDateString() %> </td>
+                        <% if(signedUser.role == 'IT'){ %>
+                          <td scope="col">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<%= ticket.spec %>"">
+                              Details
+                            </button>
+                          </td>
+                            <% } %>  
                         <td><%= ticket.status %> </td>
                         <% if(signedUser.role == 'IT'){ %>
                           <td><a href="/tickets/<%= ticket._id %>?completed=delivered" class="btn btn-success">Delivered</a></td>
                         <% } else { %> 
                         <td><%= ticket.completed %> </td>
                         <% } %>
-                        <% if(signedUser.role == 'supervisor' && status != "Approved"){ %>
+                        <% if(signedUser.role == 'supervisor' && status != "Approved" && status != "Denied"){ %>
                         <td><a href="/tickets/<%= ticket._id %>" class="btn btn-success">Approve</a></td>
+                        <td><a href="/tickets/<%= ticket._id %>/deny" class="btn btn-danger">Deny</a></td>
                           <% } %>  
                     </tr>
                   <% }) %> 
@@ -75,5 +88,32 @@
         </div>
     </div> <!--row-->
 </div>
+<% specs.forEach((spec, index)=>{ %>
+  <div class="modal fade" id="spec<%= index %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">spec<%= index %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p><b>CPU</b>: <%= spec.cpu %></p>
+          <p><b>GPU</b>: <%= spec.gpu %></span></p>
+          <p><b>Memory</b>: <%= spec.memory %></span></p>
+          <p><b>Storage</b>: <%= spec.storage %></span></p>
+          <p><b>Case</b>: <%= spec.case %>></span></p>
+          <p><b>Power Supply</b>: <%= spec.powerSupply %></span></p>
+          <p><b>Operating System</b>: <%= spec.os %>></span></p>
+          <p><b>Estimated Cost</b>: <%= spec.cost %></span></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<% }) %> 
 
 <%- include('partials/footer') %>

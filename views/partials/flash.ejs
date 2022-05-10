@@ -1,0 +1,19 @@
+<!-- check if req.success exist and success is not empty -->
+<% if(success && success.length) { %> 
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+        <%= success %> 
+        <a  class='close' data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true"> &times; </span>
+        </a>
+    </div>
+    <% } %> 
+    
+    <!-- check if req.success exist and success is not empty -->
+    <% if(error && error.length) { %> 
+        <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+            <%= error %> 
+            <a  class='close' data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"> &times; </span>
+            </a>
+        </div>
+        <% } %> 
