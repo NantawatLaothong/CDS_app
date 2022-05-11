@@ -85,6 +85,8 @@ sessionOptions = {
     secret:process.env.secret,
 }
 
+app.use(favicon(path.join(__dirname, 'public', 'logo.png')))
+
 app.use(session(sessionOptions))
 app.use(flash())
 
