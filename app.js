@@ -180,6 +180,9 @@ app.post('/users', async(req, res)=>{
             case '8911':
                 user.role = 'employee'
                 break;
+            default:
+                user.role = 'employee'
+            ;;
         }
         // flash
         user.Bio.profileImage.url = 'https://dev-app-clone-994214.s3.amazonaws.com/1646642994810__cat.jpg'
